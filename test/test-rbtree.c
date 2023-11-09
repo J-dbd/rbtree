@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-
+// #define SENTINEL 1;
 // new_rbtree should return rbtree struct with null root node
 void test_init(void) {
   rbtree *t = new_rbtree();
@@ -41,15 +41,12 @@ void test_insert_single(const key_t key) {
 void test_find_single(const key_t key, const key_t wrong_key) {
   rbtree *t = new_rbtree();
   node_t *p = rbtree_insert(t, key);
-
   node_t *q = rbtree_find(t, key);
   assert(q != NULL);
   assert(q->key == key);
   assert(q == p);
-
   q = rbtree_find(t, wrong_key);
   assert(q == NULL);
-
   delete_rbtree(t);
 }
 
@@ -318,7 +315,7 @@ void test_find_erase(rbtree *t, const key_t *arr, const size_t n) {
 
   for (int i = 0; i < n; i++) {
     node_t *p = rbtree_find(t, arr[i]);
-    // printf("arr[%d] = %d\n", i, arr[i]);
+    //printf("arr[%d] = %d\n", i, arr[i]);
     assert(p != NULL);
     assert(p->key == arr[i]);
     rbtree_erase(t, p);
@@ -370,14 +367,23 @@ void test_find_erase_rand(const size_t n, const unsigned int seed) {
 int main(void) {
   test_init();
   test_insert_single(1024);
+  //printf("insertion\n");
   test_find_single(512, 1024);
+  //printf("find_single\n");
   test_erase_root(128);
+  //printf("test_erase_root\n");
   test_find_erase_fixed();
+  //printf("test_find_erase_fixed\n");
   test_minmax_suite();
+  //printf("test_minmax_suite\n");
   test_to_array_suite();
+  //printf("test_to_array_suite\n");
   test_distinct_values();
+  //printf("test_distinct_values\n");
   test_duplicate_values();
+  //printf("test_duplicate_values\n");
   test_multi_instance();
+  //printf("test_multi_instance\n");
   test_find_erase_rand(10000, 17);
-  printf("Passed all tests!\n");
+  //printf("test_find_erase_rand\n");
 }

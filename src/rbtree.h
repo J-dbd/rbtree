@@ -29,4 +29,14 @@ int rbtree_erase(rbtree *, node_t *);
 
 int rbtree_to_array(const rbtree *, key_t *, const size_t);
 
+//custom declaration
+//////INSERTION
+void rbtree_insert_fixup(rbtree*, node_t*);
+void left_rotate(rbtree*, node_t*);
+void right_rotate(rbtree*, node_t*);
+/////DELETION
+void rb_transplant(rbtree*, node_t*, node_t*);
+void rbtree_erase_fixup(rbtree *t, node_t *p);
+
+
 #endif  // _RBTREE_H_
